@@ -5,9 +5,13 @@ import com.yiado.msvc.events.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -32,13 +36,18 @@ public class EventController {
 
     @PostMapping
     //@ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?>  create(@RequestBody Event event){
+    public ResponseEntity<?>  create(@Valid @RequestBody Event event, BindingResult result ){
+        ResponseEntity<Map<String, String>> errors = getMapResponseEntity(result);
+        if (errors != null) return errors;
         return ResponseEntity.status(HttpStatus.CREATED).body(eventService.save(event));
     }
 
     @PutMapping("/{id}")
     //@ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?>  update(@RequestBody Event user, @PathVariable Long id){
+    public ResponseEntity<?>  update(@Valid @RequestBody Event user, BindingResult result, @PathVariable Long id){
+        ResponseEntity<Map<String, String>> errors = getMapResponseEntity(result);
+        if (errors != null) return errors;
+
         Optional<Event> eventOptional =  eventService.findById(id);
         if(eventOptional.isPresent()){
             Event EventCurrent =  eventOptional.get();
@@ -56,6 +65,17 @@ public class EventController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    private static ResponseEntity<Map<String, String>> getMapResponseEntity(BindingResult result) {
+        if(result.hasErrors()){
+            Map<String, String> errors = new HashMap<>();
+            result.getFieldErrors().forEach(err -> {
+                errors.put(err.getField(), " " + err.getField() + " " + err.getDefaultMessage());
+            });
+            return ResponseEntity.badRequest().body(errors);
+        }
+        return null;
     }
 
 }
