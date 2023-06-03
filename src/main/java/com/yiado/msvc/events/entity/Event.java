@@ -1,6 +1,7 @@
 package com.yiado.msvc.events.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "event")
@@ -9,7 +10,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotEmpty
     private String name;
 
     public Long getId() {
