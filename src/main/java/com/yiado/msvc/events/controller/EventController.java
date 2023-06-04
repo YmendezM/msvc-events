@@ -1,6 +1,6 @@
 package com.yiado.msvc.events.controller;
 
-import com.yiado.msvc.events.entity.Event;
+import com.yiado.msvc.events.model.entity.Event;
 import com.yiado.msvc.events.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

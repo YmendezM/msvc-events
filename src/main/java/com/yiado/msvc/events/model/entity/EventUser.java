@@ -1,4 +1,4 @@
-package com.yiado.msvc.events.entity;
+package com.yiado.msvc.events.model.entity;
 
 import javax.persistence.*;
 

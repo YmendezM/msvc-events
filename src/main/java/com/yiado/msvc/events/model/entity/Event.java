@@ -1,4 +1,6 @@
-package com.yiado.msvc.events.entity;
+package com.yiado.msvc.events.model.entity;
+
+import com.yiado.msvc.events.model.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -19,10 +21,15 @@ public class Event {
 
     //ADD - DELETE IN CASCADE
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="EVENT_ID")
     private List<EventUser> eventUsers;
+
+    @Transient
+    private List<User> users;
 
     public Event() {
         eventUsers = new ArrayList<>();
+        users = new ArrayList<>();
     }
 
     public Long getId() {
@@ -55,5 +62,13 @@ public class Event {
 
     public void setEventUsers(List<EventUser> eventUsers) {
         this.eventUsers = eventUsers;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

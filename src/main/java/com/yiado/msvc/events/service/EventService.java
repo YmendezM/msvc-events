@@ -1,6 +1,6 @@
 package com.yiado.msvc.events.service;
 
-import com.yiado.msvc.events.entity.Event;
+import com.yiado.msvc.events.model.entity.Event;
 
 import java.util.List;
 import java.util.Optional;
