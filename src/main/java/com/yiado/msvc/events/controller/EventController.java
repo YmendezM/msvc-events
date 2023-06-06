@@ -115,6 +115,11 @@ public class EventController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/find-event-with-user-detail/{id}")
+    public ResponseEntity<?> findEventWithUserDetail(@PathVariable Long id){
+            return ResponseEntity.ok().body(eventService.findEventWithUserDetail(id));
+    };
+
 
     private static ResponseEntity<Map<String, String>> getMapResponseEntity(BindingResult result) {
         if(result.hasErrors()){

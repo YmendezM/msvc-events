@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface EventService {
     List<Event> findAllEvent();
     Optional<Event> findById(Long id);
+    Optional<Event> findEventWithUserDetail(Long id);
     Event save(Event event);
     void deleteById(Long id);
     Optional<User> assignUser(User user, Long idEvent);

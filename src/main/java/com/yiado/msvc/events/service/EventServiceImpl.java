@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImpl implements EventService{
@@ -90,6 +91,23 @@ public class EventServiceImpl implements EventService{
             eventAssign.removeEventUser(eventUser);
             eventRepository.save(eventAssign);
             return Optional.of(UserClient);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Event> findEventWithUserDetail(Long id) {
+        Optional<Event> event = eventRepository.findById(id);
+        if(event.isPresent()){
+            Event selectedEvent = event.get();
+            if(!selectedEvent.getEventUsers().isEmpty()){
+                List<Long> ids = selectedEvent.getEventUsers().stream().map(ev -> ev.getUserId()).collect(Collectors.toList());
+
+                List<User> User = userClientRest.findAllById(ids);
+                selectedEvent.setUsers(User);
+            }
+            return Optional.of(selectedEvent);
         }
         return Optional.empty();
     }
