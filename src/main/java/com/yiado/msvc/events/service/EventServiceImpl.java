@@ -111,4 +111,10 @@ public class EventServiceImpl implements EventService{
         }
         return Optional.empty();
     }
+
+    @Override
+    @Transactional
+    public void deleteUserEvent(Long id) {
+        eventRepository.deleteUserEvent(id);
+    }
 }

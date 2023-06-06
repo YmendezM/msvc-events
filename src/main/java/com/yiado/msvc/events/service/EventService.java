@@ -15,6 +15,8 @@ public interface EventService {
     Optional<User> assignUser(User user, Long idEvent);
     Optional<User> addUser(User user, Long idEvent);
     Optional<User> unassignUser(User user, Long idEvent);
+    void deleteUserEvent(Long id);
+
 
 
 }

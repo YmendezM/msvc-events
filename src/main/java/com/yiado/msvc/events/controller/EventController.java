@@ -115,6 +115,14 @@ public class EventController {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/delete-user-event/{id}")
+    //@ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<?>  deleteUserEvent(@PathVariable Long id){
+            eventService.deleteUserEvent(id);
+            return ResponseEntity.noContent().build();
+
+    }
+
     @GetMapping("/find-event-with-user-detail/{id}")
     public ResponseEntity<?> findEventWithUserDetail(@PathVariable Long id){
             return ResponseEntity.ok().body(eventService.findEventWithUserDetail(id));
