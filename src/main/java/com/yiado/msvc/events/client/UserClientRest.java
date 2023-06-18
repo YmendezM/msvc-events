@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-
-@FeignClient(name="msvc-users", url="localhost:8001")
+//call local
+//@FeignClient(name="msvc-users", url="localhost:8001")
+//call Docker container
+@FeignClient(name="msvc-users", url="msvc-users:8001")
 public interface UserClientRest {
 
     @GetMapping("/{id}")
