@@ -14,7 +14,7 @@ COPY ./msvc-events/src ./src
 
 RUN ./mvnw clean package -DskipTests
 
-FROM openjdk:17-jdk-alpine
+FROM openjdk:8u322-slim
 
 WORKDIR /app
 RUN mkdir ./logs

@@ -4,7 +4,6 @@ import com.yiado.msvc.events.model.User;
 import com.yiado.msvc.events.model.entity.Event;
 import com.yiado.msvc.events.service.EventService;
 import feign.FeignException;
-import javafx.print.Collation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
