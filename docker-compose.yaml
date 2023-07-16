@@ -2,10 +2,13 @@ version: "3.9"
 services:
   msvc-events:
     container_name: msvc-events
+    build:
+      context: ./
+      dockerfile: ../msvc-events/Dockerfile
     image: events
     ports:
       - "8002:8002"
-    env_file: .env
+    env_file: ../msvc-events/.env
     networks:
       - flipando
     restart: always
