@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  msvc-events:
+    container_name: msvc-events
+    image: events
+    ports:
+      - "8002:8002"
+    env_file: .env
+    networks:
+      - flipando
+    restart: always
+networks:
+  flipando:
+    name: flipando
